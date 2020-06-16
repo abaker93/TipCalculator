@@ -1,2 +1,0 @@
-# TipCalculator
-Created with CodeSandbox
