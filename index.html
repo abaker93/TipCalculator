@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Parcel Sandbox</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
+	<head>
+		<title>Javascript Tip Calculator</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./styles.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Yeseva+One&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-  <body>
-    <h1>Hello World!</h1>
+	<body>
+		<div id="container">
+			<h1>Resturaunt Tip Calculator</h1>
+			<hr />
+			<div>
+				<label>Total Bill:</label>
+				<input id="totalBill" type="text" placeholder="Enter your total bill..." />
+			</div>
+			<div>
+				<label>Tip:</label>
+				<input id="tipInput" type="range" value="0" />
+				<span id="tipOutput">0%</span>
+			</div>
+			<div>
+				<label>Split (number of people):</label>
+				<input id="splitInput" type="range" min="1" max="10" value="1" />
+				<span id="splitOutput">1</span>
+			</div>
+			<hr />
+			<div id="results">
+				<div>
+					<label>New Bill (per person):</label>
+					<span id="newBill">$0.00</span>
+				</div>
+				<div>
+					<label>Tip Amount (per person):</label>
+					<span id="newTip">$0.00</span>
+				</div>
+			</div>
+			<button onclick="reset()">Reset</button>
+		</div>
 
-    <script src="./scripts.js"></script>
-  </body>
+		<script>
+			document.getElementById('container').onchange = function() {
+				var bill = Number(document.getElementById('totalBill').value);
+				var tip = document.getElementById('tipInput').value;
+				var split = document.getElementById('splitInput').value;
+				var tipValue = bill * (tip / 100);
+				var newBillEach = (bill + tipValue) / split;
+				var newTipEach = tipValue / split;
+
+				document.getElementById('tipOutput').innerHTML = tip + '%';
+				document.getElementById('splitOutput').innerHTML = split;
+
+				document.getElementById('newBill').innerHTML = '$' + newBillEach.toFixed(2);
+				document.getElementById('newTip').innerHTML = '$' + newTipEach.toFixed(2);
+			};
+
+			function reset() {
+				window.location.reload();
+			}
+		</script>
+	</body>
 </html>
